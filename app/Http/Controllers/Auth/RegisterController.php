@@ -6,7 +6,7 @@ use App\Mail\Welcome;
 use App\User;
 use App\Http\Controllers\Controller;
 use Mail;
-use Illuminate\Support\Facades\Validator;
+use Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
@@ -72,6 +72,7 @@ class RegisterController extends Controller
         ]);
 
         Mail::to($user)->send(new Welcome($user));
+        flash('验证邮件已发送至您的邮箱！请及时验证。');
 
         return $user;
     }
