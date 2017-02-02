@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\Welcome;
 use App\User;
 use App\Http\Controllers\Controller;
+use Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -62,10 +64,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'confirmation_token' => str_random(60),
             'password' => bcrypt($data['password']),
         ]);
+
+        Mail::to($user)->send(new Welcome($user));
+
+        return $user;
     }
 }
