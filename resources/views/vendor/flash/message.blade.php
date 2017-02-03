@@ -22,3 +22,10 @@
         </div>
     @endif
 @endif
+
+@foreach ($errors->all() as $message)
+    <div class="alert alert-danger alert-important">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        {{ $message }}
+    </div>
+@endforeach

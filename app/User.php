@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Mail\ForgotPassword;
+use Mail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +28,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::to($this)->send(new ForgotPassword($this, $token));
+    }
 }

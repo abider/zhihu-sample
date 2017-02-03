@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\User;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 class Users extends BaseRepository
 {
