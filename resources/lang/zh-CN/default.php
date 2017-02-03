@@ -19,5 +19,7 @@ return [
     'Edit Question'        => '修改问题',
     'Title'                => '标题',
     'Body'                 => '内容',
-    'Submit'               => '提交'
+    'Submit'               => '提交',
+
+    'Topic'                => '话题',
 ];
