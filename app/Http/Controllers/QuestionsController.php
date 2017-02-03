@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestionRequest;
 use App\Question;
 use App\Repositories\Questions;
 
@@ -26,11 +27,11 @@ class QuestionsController extends Controller
         return view('questions.create');
     }
 
-    public function store()
+    public function store(StoreQuestionRequest $request)
     {
         $question = $this->question->create(
             array_merge(
-                request()->toArray(),
+                $request->toArray(),
                 ['user_id' => auth()->id()]
             )
         );
@@ -44,9 +45,9 @@ class QuestionsController extends Controller
         return view('questions.edit', compact('question'));
     }
 
-    public function update($question)
+    public function update(StoreQuestionRequest $request, $question)
     {
-        $this->question->update(request()->toArray(), $question);
+        $this->question->update($request->toArray(), $question);
         flash('问题修改成功', 'success');
 
         return redirect()->route('questions.show', $question);

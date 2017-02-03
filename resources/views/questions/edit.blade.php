@@ -11,12 +11,12 @@
                         {!! csrf_field() !!}
                         {!! method_field('PATCH') !!}
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title">{{ lang('Title') }}</label>
                             <input type="text" name="title" id="title" class="form-control" value="{{ $question->title }}" required>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                             <label for="body">{{ lang('Body') }}</label>
                             <textarea name="body" id="body" cols="30" rows="10" class="form-control" required>
                                 {{ $question->body }}

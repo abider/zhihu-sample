@@ -9,7 +9,9 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         @foreach ($questions as $question)
-                            <li class="list-group-item">{{ $question->title }}</li>
+                            <li class="list-group-item">
+                                <a href="{{ route('questions.show', $question->id) }}">{{ $question->title }}</a>
+                            </li>
                         @endforeach
                     </ul>
                 </div>

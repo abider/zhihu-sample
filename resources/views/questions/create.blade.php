@@ -10,14 +10,16 @@
                     <form action="{{ route('questions.store') }}" method="post">
                         {!! csrf_field() !!}
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="title">{{ lang('Title') }}</label>
-                            <input type="text" name="title" id="title" class="form-control" required>
+                            <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" required>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                             <label for="body">{{ lang('Body') }}</label>
-                            <textarea name="body" id="body" cols="30" rows="10" class="form-control" required></textarea>
+                            <textarea name="body" id="body" cols="30" rows="10" class="form-control" required>
+                                {{ old('body') }}
+                            </textarea>
                         </div>
 
                         <div class="form-group">
