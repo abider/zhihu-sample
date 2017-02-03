@@ -20,3 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('email/{token}', 'EmailController@confirm')->name('email.confirm');
+
+Route::post('questions', 'QuestionsController@store')->name('questions.store');
+Route::get('questions', 'QuestionsController@index')->name('questions.index');
+Route::get('questions/create', 'QuestionsController@create')->name('questions.create');
+Route::patch('questions/{question}', 'QuestionsController@update')->name('questions.update');
+Route::get('questions/{question}', 'QuestionsController@show')->name('questions.show');
+Route::delete('questions/{question}', 'QuestionsController@destroy')->name('questions.destroy');
+Route::get('questions/{question}/edit', 'QuestionsController@edit')->name('questions.edit');

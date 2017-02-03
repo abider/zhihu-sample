@@ -53,6 +53,12 @@
                             <li><a href="{{ url('/login') }}">{{ lang('Login') }}</a></li>
                             <li><a href="{{ url('/register') }}">{{ lang('Register') }}</a></li>
                         @else
+                            <li>
+                                <a href="{{ route('questions.create') }}">
+                                    {{ lang('Create Question') }}
+                                </a>
+                            </li>
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
