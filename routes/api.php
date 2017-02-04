@@ -22,3 +22,5 @@ Route::middleware('api')->get('/topics', function (Request $request) {
         ->where('name', 'like', '%'.$request->query('q').'%')
         ->get();
 });
+
+Route::post('question/{question}/follow', 'QuestionsController@follow')->name('questions.follow');

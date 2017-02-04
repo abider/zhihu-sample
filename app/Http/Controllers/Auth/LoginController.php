@@ -52,7 +52,7 @@ class LoginController extends Controller
 
         if ($this->attemptLogin(request())) {
             flash('成功登陆！', 'success');
-            return $this->sendLoginResponse(request());
+            return back();
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts

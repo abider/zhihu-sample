@@ -2,10 +2,10 @@
 
 namespace App\Repositories;
 
-use App\Question;
+use App\Answer;
 use Prettus\Repository\Criteria\RequestCriteria;
 
-class Questions extends BaseRepository
+class Answers extends BaseRepository
 {
     /**
      * Specify Model class name
@@ -14,7 +14,7 @@ class Questions extends BaseRepository
      */
     public function model()
     {
-        return Question::class;
+        return Answer::class;
     }
 
     /**
@@ -25,13 +25,8 @@ class Questions extends BaseRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function withTopicsById($id)
-    {
-        return $this->with(['topics', 'answers.user', 'user'])->find($id);
-    }
-
     /**
-     * 检索未隐藏的问题
+     * 检索未隐藏的答案
      *
      * @return mixed
      */

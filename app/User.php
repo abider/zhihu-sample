@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
 
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
     public function sendPasswordResetNotification($token)
     {
         Mail::to($this)->send(new ForgotPassword($this, $token));
@@ -47,6 +52,6 @@ class User extends Authenticatable
      */
     public function isAuthor($model)
     {
-        return $this->id == is_numeric($model) ? $model : $model->user_id;
+        return $this->id == ( is_numeric($model) ? $model : $model->user_id );
     }
 }

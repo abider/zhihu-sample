@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\Repositories\Answers;
 use App\Repositories\Topics;
 use App\Repositories\Questions;
 use App\Http\Requests\StoreQuestionRequest;
@@ -11,11 +12,13 @@ class QuestionsController extends Controller
 {
     protected $question;
     protected $topic;
+    protected $answer;
 
-    public function __construct(Questions $question, Topics $topic)
+    public function __construct(Questions $question, Topics $topic, Answers $answer)
     {
         $this->question = $question;
         $this->topic = $topic;
+        $this->answer = $answer;
         $this->middleware('auth')->except('index', 'show');
     }
 
