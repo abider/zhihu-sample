@@ -24,4 +24,27 @@ class Topics extends BaseRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    /**
+     * 格式化由select2传递过来的Topic数组，统一返回ID
+     *
+     * @param array $topics
+     * @return array
+     */
+    public function normaleze(array $topics)
+    {
+        return collect($topics)->map(function ($topic) {
+            if (is_numeric($topic)) {
+                $this->find($topic)->increment('questions_count');
+                return (int) $topic;
+            }
+
+            $newTopic = $this->create([
+                'name' => $topic,
+                'questions_count' => 1
+            ]);
+
+            return $newTopic->id;
+        })->toArray();
+    }
 }

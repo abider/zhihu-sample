@@ -24,4 +24,9 @@ class Questions extends BaseRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function withTopicsById($id)
+    {
+        return $this->with('topics')->find($id);
+    }
 }

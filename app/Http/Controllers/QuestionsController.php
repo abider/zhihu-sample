@@ -2,23 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuestionRequest;
-use App\Question;
+use App\Repositories\Topics;
 use App\Repositories\Questions;
+use App\Http\Requests\StoreQuestionRequest;
 
 class QuestionsController extends Controller
 {
     protected $question;
+    protected $topic;
 
-    public function __construct(Questions $question)
+    public function __construct(Questions $question, Topics $topic)
     {
         $this->question = $question;
-        $this->middleware('auth', ['expert' => ['index', 'show']]);
+        $this->topic = $topic;
+        $this->middleware('auth')->except('index', 'show');
     }
 
     public function index()
     {
-        $questions = $this->question->all();
+        $questions = $this->question->with('topics')->paginate();
+
         return view('questions.index', compact('questions'));
     }
 
@@ -29,15 +32,23 @@ class QuestionsController extends Controller
 
     public function store(StoreQuestionRequest $request)
     {
-        $question = $this->question->create(
-            array_merge(
-                $request->toArray(),
-                ['user_id' => auth()->id()]
-            )
-        );
+        $question = $this->question->create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => auth()->id()
+        ]);
+        $question->topics()->attach($this->topic->normaleze(request('topics')));
+
         flash('成功发布问题', 'success');
 
         return redirect()->route('questions.show', $question);
+    }
+
+    public function show($id)
+    {
+        $question = $this->question->withTopicsById($id);
+
+        return view('questions.show', compact('question'));
     }
 
     public function edit(Question $question)
@@ -48,19 +59,16 @@ class QuestionsController extends Controller
     public function update(StoreQuestionRequest $request, $question)
     {
         $this->question->update($request->toArray(), $question);
+
         flash('问题修改成功', 'success');
 
         return redirect()->route('questions.show', $question);
     }
 
-    public function show(Question $question)
-    {
-        return view('questions.show', compact('question'));
-    }
-
     public function destroy($question)
     {
         $this->question->delete($question);
+
         flash('问题删除成功', 'success');
 
         return redirect()->route('questions.index');

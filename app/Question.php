@@ -10,6 +10,6 @@ class Question extends Model
 
     public function topics()
     {
-        return $this->belongsToMany(Question::class);
+        return $this->belongsToMany(Topic::class);
     }
 }
