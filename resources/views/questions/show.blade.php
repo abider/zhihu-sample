@@ -33,7 +33,8 @@
                     </div>
 
                     <div class="media-body">
-                        <form action="{{ route('answers.store', $question->id) }}">
+                        <form action="{{ route('answers.store', $question->id) }}" method="POST">
+                            {!! csrf_field() !!}
                             <div class="form-group">
                                 <textarea class="form-control" name="body" id="" cols="30" rows="5" required></textarea>
                             </div>
