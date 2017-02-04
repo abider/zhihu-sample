@@ -15,6 +15,7 @@
         </div>
         <div class="col-md-3">
             <div class="row">
+                @if (auth()->check() && auth()->user()->isAuthor($question))
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -41,6 +42,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">

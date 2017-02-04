@@ -16,6 +16,14 @@
                             <input type="text" name="title" id="title" class="form-control" value="{{ $question->title }}" required>
                         </div>
 
+                        <div class="form-group">
+                            <select class="js-data-example-ajax form-control" multiple="multiple" name="topic[]">
+                                @foreach ($question->topics as $topic)
+                                    <option value="{{ $topic->id }}">{{ $topic->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
                             <label for="body">{{ lang('Body') }}</label>
                             <textarea name="body" id="body" cols="30" rows="10" class="form-control" required>
@@ -32,3 +40,5 @@
         </div>
     </div>
 @endsection
+
+@include('vendor.select2.js')

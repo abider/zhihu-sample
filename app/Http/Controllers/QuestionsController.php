@@ -51,9 +51,15 @@ class QuestionsController extends Controller
         return view('questions.show', compact('question'));
     }
 
-    public function edit(Question $question)
+    public function edit($id)
     {
-        return view('questions.edit', compact('question'));
+        $question = $this->question->withTopicsById($id);
+
+        if (auth()->user()->isAuthor($question)) {
+            return view('questions.edit', compact('question'));
+        }
+
+        return back();
     }
 
     public function update(StoreQuestionRequest $request, $question)

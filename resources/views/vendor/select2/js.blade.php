@@ -4,7 +4,7 @@
             return "<div class='select2-result-repository clearfix'>" +
             "<div class='select2-result-repository__meta'>" +
             "<div class='select2-result-repository__title'>" +
-            topic.name ? topic.name : "Laravel"   +
+            topic.name ? topic.name : "Laravel" +
                 "</div></div></div>";
         }
 
@@ -13,7 +13,7 @@
         }
 
         $(document).ready(function() {
-            $(".js-data-example-ajax").select2({
+            $(".js-example-basic-multiple").select2({
                 tags: true,
                 placeholder: '选择相关话题',
                 minimumInputLength: 2,
@@ -39,6 +39,6 @@
                     return markup;
                 }
             });
-        })
+        });
     </script>
 @stop

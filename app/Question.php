@@ -12,4 +12,9 @@ class Question extends Model
     {
         return $this->belongsToMany(Topic::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -29,8 +29,24 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
     public function sendPasswordResetNotification($token)
     {
         Mail::to($this)->send(new ForgotPassword($this, $token));
+    }
+
+    /**
+     * 判断是否是问题的提问者
+     *
+     * @param Model|integer $model
+     * @return bool
+     */
+    public function isAuthor($model)
+    {
+        return $this->id == is_numeric($model) ? $model : $model->user_id;
     }
 }
