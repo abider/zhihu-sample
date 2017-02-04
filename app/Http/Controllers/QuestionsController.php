@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
 use App\Repositories\Topics;
 use App\Repositories\Questions;
 use App\Http\Requests\StoreQuestionRequest;
@@ -20,7 +21,7 @@ class QuestionsController extends Controller
 
     public function index()
     {
-        $questions = $this->question->with('topics')->paginate();
+        $questions = $this->question->published()->with('topics')->paginate();
 
         return view('questions.index', compact('questions'));
     }
@@ -71,11 +72,13 @@ class QuestionsController extends Controller
         return redirect()->route('questions.show', $question);
     }
 
-    public function destroy($question)
+    public function destroy(Question $question)
     {
-        $this->question->delete($question);
+        if (auth()->user()->isAuthor($question->user_id)) {
+            $this->question->delete($question->id);
 
-        flash('问题删除成功', 'success');
+            flash('问题删除成功', 'success');
+        }
 
         return redirect()->route('questions.index');
     }

@@ -29,4 +29,14 @@ class Questions extends BaseRepository
     {
         return $this->with('topics')->find($id);
     }
+
+    /**
+     * 检索未隐藏的问题
+     *
+     * @return mixed
+     */
+    public function published()
+    {
+        return $this->model->where('is_hidden', 0);
+    }
 }
