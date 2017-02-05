@@ -40,7 +40,7 @@ class User extends Authenticatable
     }
 
     /**
-     * 关注问题的人
+     * 用户关注的问题
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

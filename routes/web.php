@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('email/{token}', 'EmailController@confirm')->name('email.confirm');
 
+Route::get('users/notifications', 'NotificationsController@index')->name('users.notifications');
+
 Route::post('questions', 'QuestionsController@store')->name('questions.store');
 Route::get('questions', 'QuestionsController@index')->name('questions.index');
 Route::get('questions/create', 'QuestionsController@create')->name('questions.create');
@@ -30,3 +32,5 @@ Route::delete('questions/{question}', 'QuestionsController@destroy')->name('ques
 Route::get('questions/{question}/edit', 'QuestionsController@edit')->name('questions.edit');
 
 Route::post('questions/{question}/answers', 'AnswersController@store')->name('answers.store');
+
+Route::get('users/{user}', 'UsersController@show')->name('users.show');
