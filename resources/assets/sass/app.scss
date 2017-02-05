@@ -3,6 +3,20 @@
 @import "variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "./../css/select2.min";
+
+.img-circle {
+  border-radius: 50%!important;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}

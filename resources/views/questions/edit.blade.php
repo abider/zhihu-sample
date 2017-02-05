@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">{{ lang('Edit Question') }}</div>
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">{{ lang('Edit Question') }}</div>
 
-                <div class="panel-body">
+                <div class="card-block">
                     <form action="{{ route('questions.update', $question->id) }}" method="post">
                         {!! csrf_field() !!}
                         {!! method_field('PATCH') !!}

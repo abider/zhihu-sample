@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     @yield('css')
 
     <!-- Scripts -->
@@ -24,65 +25,42 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded form-group">
             <div class="container">
-                <div class="navbar-header">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('questions.index') }}">全部提问 <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                @if (auth()->check())
+                    <div class="form-inline my-2 my-lg-0">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" type="button">
+                            {{ auth()->user()->name }}
+                        </button>
+                        <form action="{{ route('logout') }}" method="POST">
+                            {!! csrf_field() !!}
+                            <button type="submit" href="{{ route('logout') }}" class="btn btn-outline-secondary my-2 my-sm-0">
+                                退出登陆
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-link">
+                        登陆
                     </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">{{ lang('Login') }}</a></li>
-                            <li><a href="{{ url('/register') }}">{{ lang('Register') }}</a></li>
-                        @else
-                            <li>
-                                <a href="{{ route('questions.create') }}">
-                                    {{ lang('Create Question') }}
-                                </a>
-                            </li>
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            {{ lang('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+                    <a href="{{ route('register') }}" class="btn btn-link">
+                        注册
+                    </a>
+                @endif
+            </div>
             </div>
         </nav>
 
@@ -94,7 +72,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('/js/app.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     @yield('js')
 
 </body>

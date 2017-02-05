@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">所有问题</div>
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">所有问题</div>
 
-                <div class="panel-body">
+                <div class="card-block">
                     <ul class="list-group">
                         @foreach ($questions as $question)
                             <li class="list-group-item">

@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-default btn-block" :class="{ 'btn-danger' : followed }" @click="follow">
+    <button type="button" class="btn btn-default btn-block" :class="{ 'btn-danger' : followed }" @click="follow">
         {{ text }}
     </button>
 </template>
