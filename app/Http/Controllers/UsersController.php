@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Notifications\NewUserFollowNotification;
+use App\Notifications\NewUserMessage;
+use App\Repositories\Messages;
 use App\Repositories\Users;
 
 class UsersController extends Controller
 {
     protected $user;
+    protected $message;
 
-    public function __construct(Users $user)
+    public function __construct(Users $user, Messages $message)
     {
         $this->user = $user;
+        $this->message = $message;
     }
 
     public function show($id)

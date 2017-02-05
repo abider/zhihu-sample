@@ -126,9 +126,9 @@
                                     @endif
                                 </div>
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-default btn-block">
-                                        写私信
-                                    </button>
+                                    <send-message url="{{ route('users.send.message', $question->user_id) }}"
+                                                  name="{{ $question->user->name }}">
+                                    </send-message>
                                 </div>
                             </div>
                         </div>

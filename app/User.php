@@ -44,6 +44,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Answer::class, 'votes');
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'to_user_id');
+    }
+
     /**
      * 用户关注的问题
      *
