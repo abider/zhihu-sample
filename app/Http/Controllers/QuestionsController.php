@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Repositories\Answers;
+use App\Repositories\Follows;
 use App\Repositories\Topics;
 use App\Repositories\Questions;
 use App\Http\Requests\StoreQuestionRequest;
@@ -13,12 +14,17 @@ class QuestionsController extends Controller
     protected $question;
     protected $topic;
     protected $answer;
+    protected $follow;
 
-    public function __construct(Questions $question, Topics $topic, Answers $answer)
+    public function __construct(Questions $question,
+                                Topics $topic,
+                                Answers $answer,
+                                Follows $follow)
     {
         $this->question = $question;
         $this->topic = $topic;
         $this->answer = $answer;
+        $this->follow = $follow;
         $this->middleware('auth')->except('index', 'show');
     }
 
@@ -84,5 +90,21 @@ class QuestionsController extends Controller
         }
 
         return redirect()->route('questions.index');
+    }
+
+    public function follow($id)
+    {
+        $follow = auth()->guard('api')->user()->followQuestion($id);
+        $question = $this->question->find($id);
+
+        if (count($follow['attached']) > 0) {
+            $question->increment('followers_count');
+            $followed = true;
+        } else {
+            $question->decrement('followers_count');
+            $followed = false;
+        }
+
+        return compact('followed');
     }
 }

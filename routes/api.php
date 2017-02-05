@@ -23,4 +23,4 @@ Route::middleware('api')->get('/topics', function (Request $request) {
         ->get();
 });
 
-Route::post('question/{question}/follow', 'QuestionsController@follow')->name('questions.follow');
+Route::middleware('auth:api')->post('question/{question}/follow', 'QuestionsController@follow')->name('questions.follow');

@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class);
     }
 
+    public function questionFollows()
+    {
+        return $this->belongsToMany(Question::class, 'user_question');
+    }
+
     public function sendPasswordResetNotification($token)
     {
         Mail::to($this)->send(new ForgotPassword($this, $token));
@@ -55,5 +60,27 @@ class User extends Authenticatable
         $user_id = is_numeric($model) ? $model : $model->user_id;
 
         return $this->id == $user_id;
+    }
+
+    /**
+     * 用户关注问题
+     *
+     * @param $id   question_id
+     * @return array
+     */
+    public function followQuestion($id)
+    {
+        return $this->questionFollows()->toggle($id);
+    }
+
+    /**
+     * 判断用户是否关注了这个问题
+     *
+     * @param $id   question_id
+     * @return bool
+     */
+    public function followed($id)
+    {
+        return $this->questionFollows()->where('question_id', $id)->count() > 0;
     }
 }

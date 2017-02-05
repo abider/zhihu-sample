@@ -12171,7 +12171,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post(this.url).then(function (response) {
-                _this.followed = response.data.data, followed;
+                _this.followed = response.data.followed;
             });
         }
     }
@@ -12211,7 +12211,8 @@ window.Vue = __webpack_require__(41);
 window.axios = __webpack_require__(13);
 
 window.axios.defaults.headers.common = {
-  'X-Requested-With': 'XMLHttpRequest'
+  'X-CSRF-TOKEN': Laravel.csrfToken,
+  'Authorization': 'Bearer ' + Laravel.apiToken
 };
 
 /**

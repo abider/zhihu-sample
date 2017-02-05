@@ -28,7 +28,7 @@
         methods: {
             follow() {
                 axios.post(this.url).then((response) => {
-                    this.followed = response.data.data,followed;
+                    this.followed = response.data.followed;
                 })
             }
         }

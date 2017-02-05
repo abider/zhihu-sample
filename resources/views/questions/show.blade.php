@@ -77,7 +77,10 @@
                         </div>
                         @if (auth()->check())
                             <div class="panel-footer">
-                                <question-follow url="{{ route('questions.follow', $question->id) }}" :followed="false"></question-follow>
+                                <question-follow
+                                        url="{{ route('questions.follow', $question->id) }}"
+                                        :followed="{!! auth()->user()->followed($question->id) ? 'true' : 'false' !!}">
+                                </question-follow>
                             </div>
                         @endif
                     </div>
