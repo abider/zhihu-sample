@@ -34,3 +34,12 @@ Route::middleware('auth:api')->name('answers.vote')
 
 Route::middleware('auth:api')->name('users.send.message')
     ->post('users/{user}/message', 'MessagesController@send');
+
+Route::middleware('api')->name('questions.comments')
+    ->get('questions/{question}/comments', 'CommentsController@questions');
+
+Route::middleware('api')->name('answers.comments')
+    ->get('answers/{answer}/comments', 'CommentsController@answers');
+
+Route::middleware('auth:api')->name('comments.store')
+    ->post('comments', 'CommentsController@store');

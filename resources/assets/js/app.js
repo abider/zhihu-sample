@@ -19,6 +19,7 @@ Vue.component('question-follow', require('./components/questions/Follow.vue'));
 Vue.component('user-follow', require('./components/users/Follow.vue'));
 Vue.component('answer-vote', require('./components/answers/Vote.vue'));
 Vue.component('send-message', require('./components/users/SendMessage.vue'));
+Vue.component('comments', require('./components/comments/Index.vue'));
 
 const app = new Vue({
     el: '#app'

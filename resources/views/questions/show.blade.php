@@ -14,6 +14,10 @@
                 </div>
                 <div class="card-footer text-muted">
                     2 days ago
+                    <comments type="question"
+                              :id="{{ $question->id }}"
+                              url="{{ route('questions.comments', $question->id) }}">
+                    </comments>
                 </div>
             </div>
         </div>
@@ -64,6 +68,10 @@
                                          :voted="{{ auth()->user()->isVoteAnswer($answer->id) ? 'true' : 'false' }}">
                             </answer-vote>
                         @endif
+                        <comments type="answer"
+                                  :id="{{ $answer->id }}"
+                                  url="{{ route('answers.comments', $answer->id) }}">
+                        </comments>
                     </div>
                 </div>
             @endforeach
