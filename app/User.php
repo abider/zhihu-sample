@@ -39,11 +39,31 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class);
     }
 
-    public function questionFollows()
+    /**
+     * 关注问题的人
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function questionFollowers()
     {
         return $this->belongsToMany(Question::class, 'user_question');
     }
 
+    /**
+     * 用户关注的人
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function userFollowers()
+    {
+        return $this->belongsToMany(self::class, 'followers', 'follower_id', 'followed_id');
+    }
+
+    /**
+     * 重写发送密码重置邮件逻辑
+     *
+     * @param string $token
+     */
     public function sendPasswordResetNotification($token)
     {
         Mail::to($this)->send(new ForgotPassword($this, $token));
@@ -70,7 +90,12 @@ class User extends Authenticatable
      */
     public function followQuestion($id)
     {
-        return $this->questionFollows()->toggle($id);
+        return $this->questionFollowers()->toggle($id);
+    }
+
+    public function followUser($id)
+    {
+        return $this->userFollowers()->toggle($id);
     }
 
     /**
@@ -79,8 +104,19 @@ class User extends Authenticatable
      * @param $id   question_id
      * @return bool
      */
-    public function followed($id)
+    public function isFollowedQuestion($id)
     {
-        return $this->questionFollows()->where('question_id', $id)->count() > 0;
+        return $this->questionFollowers()->where('question_id', $id)->count() > 0;
+    }
+
+    /**
+     * 判断当前用户是否关注了这个用户
+     *
+     * @param $id   user_id
+     * @return bool
+     */
+    public function isFollowedUser($id)
+    {
+        return $this->userFollowers()->where('followed_id', $id)->count() > 0;
     }
 }

@@ -12,7 +12,27 @@
                     {{ $question->body }}
                 </div>
             </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>关注者</h4>
+                    <h3>{{ $question->followers_count }}</h3>
+                </div>
+                @if (auth()->check())
+                    <div class="panel-footer">
+                        <question-follow
+                                url="{{ route('questions.follow', $question->id) }}"
+                                :followed="{!! auth()->user()->isFollowedQuestion($question->id) ? 'true' : 'false' !!}">
+                        </question-follow>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-md-9">
             @foreach ($question->answers as $answer)
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -55,34 +75,30 @@
             @endif
 
         </div>
+
         <div class="col-md-3">
             <div class="row">
-                <div class="col-md-12 text-center">
+                <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            作者
+                        </div>
+                        <div class="panel-body text-center">
                             <img class="img-circle" width="60" src="{{ $question->user->avatar }}" alt="{{ $question->user->name }}">
                             <h3>{{ $question->user->name }}</h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-footer">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <h3>{{ $question->followers_count }}</h3>
-                                    问题关注
-                                </div>
-                                <div class="col-xs-6">
-                                    <h3>{{ $question->answers_count }}</h3>
-                                    答案
+                                    @if (auth()->check())
+                                    <user-follow
+                                            url="{{ route('users.follow', $question->user_id) }}"
+                                            :followed="{!! auth()->user()->isFollowedUser($question->user_id) ? 'true' : 'false' !!}">
+                                    </user-follow>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-                        @if (auth()->check())
-                            <div class="panel-footer">
-                                <question-follow
-                                        url="{{ route('questions.follow', $question->id) }}"
-                                        :followed="{!! auth()->user()->followed($question->id) ? 'true' : 'false' !!}">
-                                </question-follow>
-                            </div>
-                        @endif
                     </div>
                 </div>
 
