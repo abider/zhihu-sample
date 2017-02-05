@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'confirmation_token',
+        'name', 'email', 'password', 'confirmation_token', 'api_token'
     ];
 
     /**
@@ -52,6 +52,8 @@ class User extends Authenticatable
      */
     public function isAuthor($model)
     {
-        return $this->id == ( is_numeric($model) ? $model : $model->user_id );
+        $user_id = is_numeric($model) ? $model : $model->user_id;
+
+        return $this->id == $user_id;
     }
 }

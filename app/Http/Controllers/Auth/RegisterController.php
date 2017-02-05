@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'confirmation_token' => str_random(60),
             'password' => bcrypt($data['password']),
+            'api_token' => str_random(30),
         ]);
 
         Mail::to($user)->send(new Welcome($user));

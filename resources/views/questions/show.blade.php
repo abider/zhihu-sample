@@ -82,7 +82,7 @@
                         @endif
                     </div>
                 </div>
-                {{ auth()->user()->isAuthor($question) }}
+
                 @if (auth()->check() && auth()->user()->isAuthor($question))
                     <div class="col-md-12">
                         <div class="panel panel-default">

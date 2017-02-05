@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->integer('followers_count')->default(0); // 关注量
             $table->integer('followings_count')->default(0); // 被关注量
             $table->json('setting')->nullable(); // 个人信息和设置
+            $table->string('api_token');
             $table->rememberToken();
             $table->timestamps();
         });
