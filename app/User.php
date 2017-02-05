@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class);
     }
 
+    public function votes()
+    {
+        return $this->belongsToMany(Answer::class, 'votes');
+    }
+
     /**
      * 用户关注的问题
      *
@@ -93,9 +98,26 @@ class User extends Authenticatable
         return $this->questionFollowers()->toggle($id);
     }
 
+    /**
+     * 用户关注另一个用户
+     *
+     * @param $id   user_id
+     * @return array
+     */
     public function followUser($id)
     {
         return $this->userFollowers()->toggle($id);
+    }
+
+    /**
+     * 用户对一个答案点赞
+     *
+     * @param $id   answer_id
+     * @return array
+     */
+    public function voteForAnswer($id)
+    {
+        return $this->votes()->toggle($id);
     }
 
     /**
@@ -118,5 +140,16 @@ class User extends Authenticatable
     public function isFollowedUser($id)
     {
         return $this->userFollowers()->where('followed_id', $id)->count() > 0;
+    }
+
+    /**
+     * 判断当前用户是否点赞了这个答案
+     *
+     * @param $id   answer_id
+     * @return bool
+     */
+    public function isVoteAnswer($id)
+    {
+        return $this->votes()->where('answer_id', $id)->count() > 0;
     }
 }

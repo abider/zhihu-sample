@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Answer;
 use App\Question;
 use App\Repositories\Answers;
 use App\Repositories\Questions;
@@ -30,5 +31,20 @@ class AnswersController extends Controller
         flash('感谢您的回答！', 'success');
 
         return back();
+    }
+
+    public function vote(Answer $answer)
+    {
+        $vote = auth()->guard('api')->user()->voteForAnswer($answer->id);
+
+        if (count($vote['attached']) > 0) {
+            $answer->increment('votes_count');
+            $voted = true;
+        } else {
+            $answer->decrement('votes_count');
+            $voted = false;
+        }
+
+        return compact('voted');
     }
 }

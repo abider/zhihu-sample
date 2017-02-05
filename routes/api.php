@@ -28,3 +28,6 @@ Route::middleware('auth:api')->name('questions.follow')
 
 Route::middleware('auth:api')->name('users.follow')
     ->post('users/{user}/follow', 'UsersController@follow');
+
+Route::middleware('auth:api')->name('answers.vote')
+    ->post('answer/{answer}/vote', 'AnswersController@vote');

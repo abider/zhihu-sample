@@ -58,6 +58,12 @@
                     <div class="card-footer">
                         <img width="40" class="img-thumbnail rounded-circle" src="{{ $answer->user->avatar }}" alt="{{ $answer->user->name }}">
                         {{ $answer->user->name }}
+                        @if (auth()->check())
+                            <answer-vote url="{{ route('answers.vote', $answer->id) }}"
+                                         :vote-count="{{ $answer->votes_count }}"
+                                         :voted="{{ auth()->user()->isVoteAnswer($answer->id) ? 'true' : 'false' }}">
+                            </answer-vote>
+                        @endif
                     </div>
                 </div>
             @endforeach
