@@ -31,6 +31,4 @@ Route::get('questions/{question}', 'QuestionsController@show')->name('questions.
 Route::delete('questions/{question}', 'QuestionsController@destroy')->name('questions.destroy');
 Route::get('questions/{question}/edit', 'QuestionsController@edit')->name('questions.edit');
 
-Route::post('questions/{question}/answers', 'AnswersController@store')->name('answers.store');
-
 Route::get('users/{user}', 'UsersController@show')->name('users.show');

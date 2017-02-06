@@ -40,9 +40,9 @@
                             </div>
                             <div class="col-6">
                                 @if (auth()->check())
-                                    <button class="btn btn-outline-primary">
-                                        写回答
-                                    </button>
+                                    <answer-write url="{{ route('answers.store', $question->id) }}"
+                                                  title="{{ $question->title }}">
+                                    </answer-write>
                                 @endif
                             </div>
                         </div>

@@ -28,9 +28,7 @@ class AnswersController extends Controller
 
         $question->increment('answers_count');
 
-        flash('感谢您的回答！', 'success');
-
-        return back();
+        return ['result' => true];
     }
 
     public function vote(Answer $answer)

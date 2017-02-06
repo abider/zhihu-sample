@@ -32,6 +32,9 @@ Route::middleware('auth:api')->name('users.follow')
 Route::middleware('auth:api')->name('answers.vote')
     ->post('answer/{answer}/vote', 'AnswersController@vote');
 
+Route::middleware('auth:api')->name('answers.store')
+    ->post('questions/{question}/answers', 'AnswersController@store');
+
 Route::middleware('auth:api')->name('users.send.message')
     ->post('users/{user}/message', 'MessagesController@send');
 
