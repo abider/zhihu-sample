@@ -93,12 +93,12 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#answers" role="tab">回答 ({{ $user->answers->count() }})</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#follow" role="tab">关注</a>
+                    </li>
                     @if (auth()->check())
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#notifications" role="tab">消息 ({{ $user->notifications->count() }})</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#follow" role="tab">关注</a>
                     </li>
                     @endif
                 </ul>
@@ -131,13 +131,6 @@
                                     {{ $answer->body }} 回答于 <a href="{{ route('questions.show', $answer->question_id) }}">{{ $answer->question->title }}</a>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-
-                    @if (auth()->check())
-                    <div class="tab-pane fade" id="notifications" role="tabpanel">
-                        @foreach ($user->notifications as $notification)
-                            @include('notifications.' . snake_case(class_basename($notification->type)))
                         @endforeach
                     </div>
 
@@ -205,6 +198,13 @@
                                 @endforeach
                             </div>
                         </div>
+                    </div>
+
+                    @if (auth()->check())
+                    <div class="tab-pane fade" id="notifications" role="tabpanel">
+                        @foreach ($user->notifications as $notification)
+                            @include('notifications.' . snake_case(class_basename($notification->type)))
+                        @endforeach
                     </div>
                     @endif
                 </div>
