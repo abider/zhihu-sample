@@ -21,7 +21,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = $this->user->with([
-            'questions', 'answers', 'followers', 'questionFollowers'
+            'questions', 'answers.question', 'userFollowers', 'userFolloweds', 'questionFollowers'
         ])->find($id);
 
         return view('users.show', compact('user'));
