@@ -13,7 +13,7 @@
                     </p>
                 </div>
                 <div class="card-footer text-muted">
-                    2 days ago
+                    提问于 {{ $question->created_at->diffForHumans() }}
                     <comments type="question"
                               :id="{{ $question->id }}"
                               url="{{ route('questions.comments', $question->id) }}">
@@ -56,18 +56,18 @@
         <div class="col-md-9">
             @foreach ($question->answers as $answer)
                 <div class="card form-group">
+                    <div class="card-header">
+                        <img width="40" class="img-thumbnail rounded-circle" src="{{ $answer->user->avatar }}" alt="{{ $answer->user->name }}">
+                        {{ $answer->user->name }} 发表于 {{ $answer->created_at->diffForHumans() }}
+                    </div>
                     <div class="card-block">
                         {{ $answer->body }}
                     </div>
                     <div class="card-footer">
-                        <img width="40" class="img-thumbnail rounded-circle" src="{{ $answer->user->avatar }}" alt="{{ $answer->user->name }}">
-                        {{ $answer->user->name }}
-                        @if (auth()->check())
-                            <answer-vote url="{{ route('answers.vote', $answer->id) }}"
-                                         :vote-count="{{ $answer->votes_count }}"
-                                         :voted="{{ auth()->user()->isVoteAnswer($answer->id) ? 'true' : 'false' }}">
-                            </answer-vote>
-                        @endif
+                        <answer-vote url="{{ route('answers.vote', $answer->id) }}"
+                                     :vote-count="{{ $answer->votes_count }}"
+                                     :voted="{{ auth()->user()->isVoteAnswer($answer->id) ? 'true' : 'false' }}">
+                        </answer-vote>
                         <comments type="answer"
                                   :id="{{ $answer->id }}"
                                   url="{{ route('answers.comments', $answer->id) }}">
@@ -75,13 +75,6 @@
                     </div>
                 </div>
             @endforeach
-
-            @if (!auth()->check())
-                <div class="alert alert-danger" role="alert">
-                    <strong>您未登陆！</strong>
-                    登陆后可进行回答问题。<a href="{{ route('login') }}">马上登陆</a>
-                </div>
-            @endif
 
         </div>
 

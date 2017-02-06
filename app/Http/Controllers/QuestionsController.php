@@ -30,9 +30,10 @@ class QuestionsController extends Controller
 
     public function index()
     {
-        $questions = $this->question->published()->with('topics')->paginate();
+        $questions = $this->question->published()->latest('id')->with('topics', 'user')->paginate();
+        $answers = $this->answer->latest('id')->with('question', 'user')->paginate(6);
 
-        return view('questions.index', compact('questions'));
+        return view('questions.index', compact('questions', 'answers'));
     }
 
     public function create()
