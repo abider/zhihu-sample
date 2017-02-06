@@ -1,5 +1,5 @@
 <template>
-    <button class="btn btn-default btn-block" :class="{ 'btn-danger' : followed }" @click="follow">
+    <button class="btn btn-default btn-block" :class="{ 'btn-danger' : followed }" :disabled="!login" @click="follow">
         {{ text }}
     </button>
 </template>
@@ -23,6 +23,9 @@
         computed: {
             text() {
                 return this.followed ? '取消关注' : '关注Ta';
+            },
+            login() {
+                return Laravel.apiToken.length > 0;
             }
         },
         methods: {

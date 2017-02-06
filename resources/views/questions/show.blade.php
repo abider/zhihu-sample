@@ -29,25 +29,21 @@
                     </h5>
                     <h2>{{ $question->followers_count }}</h2>
                 </div>
-                @if (auth()->check())
-                    <div class="card-footer text-muted">
-                        <div class="row">
-                            <div class="col-6">
-                                <question-follow
-                                        url="{{ route('questions.follow', $question->id) }}"
-                                        :followed="{!! auth()->user()->isFollowedQuestion($question->id) ? 'true' : 'false' !!}">
-                                </question-follow>
-                            </div>
-                            <div class="col-6">
-                                @if (auth()->check())
-                                    <answer-write url="{{ route('answers.store', $question->id) }}"
-                                                  title="{{ $question->title }}">
-                                    </answer-write>
-                                @endif
-                            </div>
+                <div class="card-footer text-muted">
+                    <div class="row">
+                        <div class="col-6">
+                            <question-follow
+                                    url="{{ route('questions.follow', $question->id) }}"
+                                    :followed="{!! auth()->check() && auth()->user()->isFollowedQuestion($question->id) ? 'true' : 'false' !!}">
+                            </question-follow>
+                        </div>
+                        <div class="col-6">
+                            <answer-write url="{{ route('answers.store', $question->id) }}"
+                                          title="{{ $question->title }}">
+                            </answer-write>
                         </div>
                     </div>
-                @endif
+                </div>
             </div>
         </div>
     </div>
@@ -66,7 +62,7 @@
                     <div class="card-footer">
                         <answer-vote url="{{ route('answers.vote', $answer->id) }}"
                                      :vote-count="{{ $answer->votes_count }}"
-                                     :voted="{{ auth()->user()->isVoteAnswer($answer->id) ? 'true' : 'false' }}">
+                                     :voted="{{ auth()->check() && auth()->user()->isVoteAnswer($answer->id) ? 'true' : 'false' }}">
                         </answer-vote>
                         <comments type="answer"
                                   :id="{{ $answer->id }}"
@@ -119,12 +115,10 @@
                         <div class="card-footer text-center">
                             <div class="row">
                                 <div class="col-6">
-                                    @if (auth()->check())
                                     <user-follow
                                             url="{{ route('users.follow', $question->user_id) }}"
-                                            :followed="{!! auth()->user()->isFollowedUser($question->user_id) ? 'true' : 'false' !!}">
+                                            :followed="{!! auth()->check() && auth()->user()->isFollowedUser($question->user_id) ? 'true' : 'false' !!}">
                                     </user-follow>
-                                    @endif
                                 </div>
                                 <div class="col-6">
                                     <send-message url="{{ route('users.send.message', $question->user_id) }}"

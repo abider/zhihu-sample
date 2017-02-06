@@ -12175,6 +12175,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         text: function text() {
             return this.voted ? '已赞' : '点赞';
+        },
+        login: function login() {
+            return Laravel.apiToken.length > 0;
         }
     },
     methods: {
@@ -12255,6 +12258,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    computed: {
+        login: function login() {
+            return Laravel.apiToken.length > 0;
+        }
+    },
     methods: {
         send: function send() {
             var _this = this;
@@ -12419,7 +12427,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     computed: {
         text: function text() {
-            return this.followed ? '取消关注' : '关注该问题';
+            return this.followed ? '取消关注' : '关注问题';
+        },
+        login: function login() {
+            return Laravel.apiToken.length > 0;
         }
     },
     methods: {
@@ -12464,6 +12475,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         text: function text() {
             return this.followed ? '取消关注' : '关注Ta';
+        },
+        login: function login() {
+            return Laravel.apiToken.length > 0;
         }
     },
     methods: {
@@ -12546,6 +12560,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     computed: {
         title: function title() {
             return '发送私信给 ' + this.name;
+        },
+        login: function login() {
+            return Laravel.apiToken.length > 0;
         }
     },
     methods: {
@@ -31111,6 +31128,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "button",
       "data-toggle": "modal",
+      "disabled": !_vm.login,
       "data-target": "#messageModal"
     }
   }, [_vm._v("\n        写私信\n    ")]), _vm._v(" "), _c('div', {
@@ -31212,7 +31230,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'btn-danger': _vm.followed
     },
     attrs: {
-      "type": "button"
+      "type": "button",
+      "disabled": !_vm.login
     },
     on: {
       "click": _vm.follow
@@ -31305,7 +31324,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("取消")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "type": "button"
+      "type": "button",
+      "disabled": !_vm.login
     },
     on: {
       "click": _vm.store
@@ -31351,7 +31371,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'btn-primary': _vm.voted, 'btn-outline-primary': !_vm.voted
     },
     attrs: {
-      "type": "button"
+      "type": "button",
+      "disabled": !_vm.login
     },
     on: {
       "click": _vm.vote
@@ -31376,6 +31397,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     class: {
       'btn-danger': _vm.followed
     },
+    attrs: {
+      "disabled": !_vm.login
+    },
     on: {
       "click": _vm.follow
     }
@@ -31398,6 +31422,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "btn btn-primary btn-block",
     attrs: {
       "type": "button",
+      "disabled": !_vm.login,
       "data-toggle": "modal",
       "data-target": "#answerModal"
     }

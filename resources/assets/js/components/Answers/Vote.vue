@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="btn btn-sm" :class="{ 'btn-primary' : voted, 'btn-outline-primary' : !voted }" @click="vote">
+    <button type="button" class="btn btn-sm" :class="{ 'btn-primary' : voted, 'btn-outline-primary' : !voted }" :disabled="!login" @click="vote">
         {{ text }} ({{ voteCount }})
     </button>
 </template>
@@ -29,6 +29,9 @@
         computed: {
             text() {
                 return this.voted ? '已赞' : '点赞';
+            },
+            login() {
+                return Laravel.apiToken.length > 0;
             }
         },
         methods: {

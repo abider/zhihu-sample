@@ -33,7 +33,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-primary" @click="store">评论</button>
+                        <button type="button" class="btn btn-primary" :disabled="!login" @click="store">评论</button>
                     </div>
                 </div>
             </div>

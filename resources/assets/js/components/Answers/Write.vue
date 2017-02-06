@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#answerModal">
+        <button type="button" class="btn btn-primary btn-block" :disabled="!login" data-toggle="modal" data-target="#answerModal">
             写回答
         </button>
 
@@ -55,6 +55,11 @@
             return {
                 body: '',
                 status: false
+            }
+        },
+        computed: {
+            login() {
+                return Laravel.apiToken.length > 0;
             }
         },
         methods: {

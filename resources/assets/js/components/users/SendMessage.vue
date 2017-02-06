@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#messageModal">
+        <button type="button" class="btn btn-primary" data-toggle="modal" :disabled="!login" data-target="#messageModal">
             写私信
         </button>
 
@@ -60,6 +60,9 @@
         computed: {
             title() {
                 return '发送私信给 ' + this.name;
+            },
+            login() {
+                return Laravel.apiToken.length > 0;
             }
         },
         methods: {
