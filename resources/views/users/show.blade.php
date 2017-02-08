@@ -72,19 +72,19 @@
         <div class="form-group"></div>
 
         <div class="row">
-            <div class="col-md-3">
-                @if (auth()->check() && auth()->user()->isAuthor($user->id))
-                <div class="btn-group-vertical btn-block btn-group-lg" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-secondary">
-                        编辑个人资料
-                    </button>
-                    <button type="button" class="btn btn-secondary">
-                        查看私信
-                    </button>
-                </div>
-                @endif
-            </div>
-            <div class="col-md-9">
+            {{--@if (auth()->check() && auth()->user()->isAuthor($user->id))--}}
+                {{--<div class="col-md-3">--}}
+                    {{--<div class="btn-group-vertical btn-block btn-group-lg" role="group" aria-label="Basic example">--}}
+                        {{--<button type="button" class="btn btn-secondary">--}}
+                            {{--编辑个人资料--}}
+                        {{--</button>--}}
+                        {{--<button type="button" class="btn btn-secondary">--}}
+                            {{--查看私信--}}
+                        {{--</button>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--@endif--}}
+            <div class="col-12">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
@@ -96,7 +96,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#follow" role="tab">关注</a>
                     </li>
-                    @if (auth()->check())
+                    @if (auth()->check() && auth()->user()->isAuthor($user->id))
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="tab" href="#notifications" role="tab">消息 ({{ $user->notifications->count() }})</a>
                     </li>
@@ -200,7 +200,7 @@
                         </div>
                     </div>
 
-                    @if (auth()->check())
+                    @if (auth()->check() && auth()->user()->isAuthor($user->id))
                     <div class="tab-pane fade" id="notifications" role="tabpanel">
                         @foreach ($user->notifications as $notification)
                             @include('notifications.' . snake_case(class_basename($notification->type)))

@@ -88,18 +88,18 @@
                             <div class="row">
                                 <div class="col-4">
                                     <p class="text-muted">
-                                        回答
+                                        提问
                                     </p>
                                     <h5>
-                                        {{ $question->user->answers_count }}
+                                        {{ $question->user->questions()->count() }}
                                     </h5>
                                 </div>
                                 <div class="col-4">
                                     <p class="text-muted">
-                                        文章
+                                        回答
                                     </p>
                                     <h5>
-                                        0
+                                        {{ $question->user->answers()->count() }}
                                     </h5>
                                 </div>
                                 <div class="col-4">
@@ -107,7 +107,7 @@
                                         关注者
                                     </p>
                                     <h5>
-                                        {{ $question->user->followings_count }}
+                                        {{ $question->user->userFolloweds()->count() }}
                                     </h5>
                                 </div>
                             </div>
@@ -159,23 +159,23 @@
                     </div>
                 @endif
 
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            {{ lang('Topic') }}
-                        </div>
-                        <div class="card-block">
-                            <ul class="list-group">
-                                @foreach ($question->topics as $topic)
-                                <li class="list-group-item">
-                                    {{ $topic->name }}
-                                    <span class="badge">{{ $topic->questions_count }}</span>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                {{--<div class="col-md-12">--}}
+                    {{--<div class="card">--}}
+                        {{--<div class="card-header">--}}
+                            {{--{{ lang('Topic') }}--}}
+                        {{--</div>--}}
+                        {{--<div class="card-block">--}}
+                            {{--<ul class="list-group">--}}
+                                {{--@foreach ($question->topics as $topic)--}}
+                                {{--<li class="list-group-item">--}}
+                                    {{--{{ $topic->name }}--}}
+                                    {{--<span class="badge">{{ $topic->questions_count }}</span>--}}
+                                {{--</li>--}}
+                                {{--@endforeach--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
 
         </div>

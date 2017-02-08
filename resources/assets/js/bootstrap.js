@@ -8,7 +8,7 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
-require('./select2.min');
+// require('./select2.min');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces

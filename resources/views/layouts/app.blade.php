@@ -45,6 +45,9 @@
                 </ul>
                 @if (auth()->check())
                     <div class="form-inline my-2 my-lg-0">
+                        <a href="{{ route('questions.create') }}" class="btn btn-link">
+                            发起提问
+                        </a>
                         <a href="{{ route('users.show', auth()->id()) }}" class="btn btn-outline-primary my-2 my-sm-0" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="个人中心">
                             {{ auth()->user()->name }}
                         </a>
@@ -75,7 +78,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('/js/app.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <script>
