@@ -112,21 +112,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer text-center">
-                            <div class="row">
-                                <div class="col-6">
-                                    <user-follow
-                                            url="{{ route('users.follow', $question->user_id) }}"
-                                            :followed="{!! auth()->check() && auth()->user()->isFollowedUser($question->user_id) ? 'true' : 'false' !!}">
-                                    </user-follow>
+                        @if (auth()->check())
+                            @if ( ! auth()->user()->isAuthor($question->user_id))
+                                <div class="card-footer text-center">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <user-follow
+                                                    url="{{ route('users.follow', $question->user_id) }}"
+                                                    :followed="{!! auth()->check() && auth()->user()->isFollowedUser($question->user_id) ? 'true' : 'false' !!}">
+                                            </user-follow>
+                                        </div>
+                                        <div class="col-6">
+                                            <send-message url="{{ route('users.send.message', $question->user_id) }}"
+                                                          name="{{ $question->user->name }}">
+                                            </send-message>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <send-message url="{{ route('users.send.message', $question->user_id) }}"
-                                                  name="{{ $question->user->name }}">
-                                    </send-message>
-                                </div>
-                            </div>
-                        </div>
+                            @endif
+                        @endif
                     </div>
                 </div>
 
