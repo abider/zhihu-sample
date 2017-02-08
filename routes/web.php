@@ -11,17 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'QuestionsController@index')->name('home');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('email/{token}', 'EmailController@confirm')->name('email.confirm');
 
 Route::get('users/notifications', 'NotificationsController@index')->name('users.notifications');
+Route::get('users/{user}', 'UsersController@show')->name('users.show');
 
 Route::post('questions', 'QuestionsController@store')->name('questions.store');
 Route::get('questions', 'QuestionsController@index')->name('questions.index');
@@ -30,5 +27,3 @@ Route::patch('questions/{question}', 'QuestionsController@update')->name('questi
 Route::get('questions/{question}', 'QuestionsController@show')->name('questions.show');
 Route::delete('questions/{question}', 'QuestionsController@destroy')->name('questions.destroy');
 Route::get('questions/{question}/edit', 'QuestionsController@edit')->name('questions.edit');
-
-Route::get('users/{user}', 'UsersController@show')->name('users.show');
