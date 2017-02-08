@@ -1,40 +1,29 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+![livether](http://oh6t02bhk.bkt.clouddn.com/zhihu-sample-mac.png)
+## zhihu-sample
+* 模仿知乎的一个问答社区
+* 属于练手项目，不作上线使用
+* 参考 [Laravist](https://www.laravist.com/) 的 [Laravel 实战：开发知乎](https://www.laravist.com/series/build-a-zhihu-website-with-laravel) 开发而成
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Demo
+* https://zhihu.abcode.cc/
+* 仅供演示，不作上线使用
 
-## About Laravel
+## 概述
+* PHP框架[ Laravel 5.4](https://laravel.com/docs/5.4)
+* Javascript框架 [Vue.js 2.0](https://vuejs.org/v2/guide/)
+* 使用 [Bootstrap v4](https://v4-alpha.getbootstrap.com/getting-started/introduction/) 作为基本UI
+* 本地开发环境使用 [Homestead](https://github.com/laravel/homestead) 进行开发
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## 实战
+* 第一次使用 [yarn](https://yarnpkg.com/lang/en/) 作为 Javascript 包管理器
+* 使用 [ Laravel 5.4](https://laravel.com/docs/5.4) 新增的 [Laravel Mix](https://laravel.com/docs/5.4/mix) 作为前端文件编译工具
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 计划
+> 视情况而定
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
-
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+* 完善话题 (Topic) 的使用
+* 消息通知 (Notifications)
+* 私信 (Message)
+* 完善的邮件发送模板 ([Mail](https://laravel.com/docs/5.4/mail))，包括但不限于密码找回、新关注、新私信、新回答等等。
+* HTTPS的应用
